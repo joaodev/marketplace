@@ -1,4 +1,4 @@
-package com.joaodev.marketplace.catalog;
+package com.joaodev.marketplace.catalog.infrastructure;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -75,11 +75,5 @@ public class CatalogConfiguration {
     public PlatformTransactionManager catalogTransactionManager(@Qualifier("catalog") LocalContainerEntityManagerFactoryBean emf) {
         assert emf.getObject() != null;
         return new JpaTransactionManager(emf.getObject());
-    }
-
-    @Primary
-    @Bean
-    public RedisCacheManager catalogCacheManager(RedisConnectionFactory connectionFactory) {
-        return RedisCacheManager.builder(connectionFactory).build();
     }
 }
